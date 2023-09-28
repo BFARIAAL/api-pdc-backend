@@ -6,11 +6,12 @@ import jakarta.persistence.*;
 @Table(name = "vehicles")
 public class Vehicle {
     @Id
-    private String vin;
+    @Column(name="id")
+    private Integer vin;
     @Column(name = "loc_code")
     private String loc;
 
-    public Vehicle(String vin, String loc_code) {
+    public Vehicle(Integer vin, String loc_code) {
         this.vin = vin;
         this.loc = loc_code;
     }
@@ -18,11 +19,11 @@ public class Vehicle {
     public Vehicle() {
     }
 
-    public Vehicle(String vin) {
+    public Vehicle(Integer vin) {
         this.vin = vin;
     }
 
-    public String getVin() {
+    public Integer getVin() {
         return vin;
     }
 
