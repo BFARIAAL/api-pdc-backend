@@ -2,16 +2,26 @@ package com.jlr.ttl.poc.loadmanager.models;
 
 import jakarta.persistence.*;
 
+import java.util.Date;
+
 @Entity
 @Table(name = "vehicles")
 public class Vehicle {
+
     @Id
-    @Column(name="id")
-    private Integer vin;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column
+    private Integer id;
+
+    @Column(name = "short_vin")
+    private String vin;
     @Column(name = "loc_code")
     private String loc;
 
-    public Vehicle(Integer vin, String loc_code) {
+    @Column(name = "end_date")
+    private Date date;
+
+    public Vehicle(String vin, String loc_code) {
         this.vin = vin;
         this.loc = loc_code;
     }
@@ -19,11 +29,11 @@ public class Vehicle {
     public Vehicle() {
     }
 
-    public Vehicle(Integer vin) {
+    public Vehicle(String vin) {
         this.vin = vin;
     }
 
-    public Integer getVin() {
+    public String getVin() {
         return vin;
     }
 
