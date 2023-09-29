@@ -1,6 +1,4 @@
-CREATE DATABASE  IF NOT EXISTS `d42-api-pdc` /*!40100 DEFAULT CHARACTER SET latin1 */;
-USE `d42-api-pdc`;
--- MySQL dump 10.13  Distrib 8.0.31, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.34, for Win64 (x86_64)
 --
 -- Host: localhost    Database: d42-api-pdc
 -- ------------------------------------------------------
@@ -174,6 +172,7 @@ CREATE TABLE `vehicles` (
   `short_vin` varchar(8) DEFAULT NULL,
   `loc_code` varchar(45) NOT NULL,
   `end_date` date DEFAULT NULL,
+  `status` enum('INTRANS','DLVRD','INLOAD','BUILT') DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`),
   KEY `Fk_loc_idx` (`loc_code`),
@@ -187,7 +186,7 @@ CREATE TABLE `vehicles` (
 
 LOCK TABLES `vehicles` WRITE;
 /*!40000 ALTER TABLE `vehicles` DISABLE KEYS */;
-INSERT INTO `vehicles` VALUES (1,'LK003500','BDC',NULL),(2,'LK003501','BDC',NULL),(3,'LK003502','ZUKA',NULL);
+INSERT INTO `vehicles` VALUES (1,'LK003500','BDC',NULL,NULL),(2,'LK003501','BDC',NULL,NULL),(3,'LK003502','ZUKA',NULL,NULL);
 /*!40000 ALTER TABLE `vehicles` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -200,4 +199,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-09-28 14:58:11
+-- Dump completed on 2023-09-29  9:44:35
