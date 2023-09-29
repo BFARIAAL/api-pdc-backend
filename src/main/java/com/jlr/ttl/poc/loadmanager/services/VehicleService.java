@@ -24,7 +24,7 @@ public class VehicleService {
     }
 
     public void addNewVehicleService(Vehicle vehicle) {
-        Optional<Vehicle> vehicleByVin = vehicleRepo.findById(vehicle.getVin().toString());
+        Optional<Vehicle> vehicleByVin = vehicleRepo.findById(vehicle.getClass().toString());
         if (vehicleByVin.isPresent()) {
             throw new IllegalStateException();
         }
