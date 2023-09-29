@@ -1,7 +1,7 @@
 package com.jlr.ttl.ds.api.services;
 
-import com.jlr.ttl.ds.api.dto.Vehicle;
-import com.jlr.ttl.ds.api.repositories.VehicleRepo;
+import com.jlr.ttl.ds.api.dto.entity.Vehicle;
+import com.jlr.ttl.ds.api.repositories.VehicleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,38 +13,38 @@ import java.util.Optional;
 public class VehicleService {
 
     @Autowired
-    private final VehicleRepo vehicleRepo;
+    private final VehicleRepository vehicleRepository;
 
-    public VehicleService(VehicleRepo vehicleRepo) {
-        this.vehicleRepo = vehicleRepo;
+    public VehicleService(VehicleRepository vehicleRepository) {
+        this.vehicleRepository = vehicleRepository;
     }
 
     public List<Vehicle> getAllVehiclesService() {
-        return vehicleRepo.findAll();
+        return vehicleRepository.findAll();
     }
 
     public void addNewVehicleService(Vehicle vehicle) {
-        Optional<Vehicle> vehicleByVin = vehicleRepo.findById(vehicle.getVin().toString());
+        Optional<Vehicle> vehicleByVin = vehicleRepository.findById(vehicle.getVin().toString());
         if (vehicleByVin.isPresent()) {
             throw new IllegalStateException();
         }
-        vehicleRepo.save(vehicle);
+        vehicleRepository.save(vehicle);
     }
 
     public void deleteVehicleService(String vin) {
-       vehicleRepo.findById(vin)
+       vehicleRepository.findById(vin)
                 .orElseThrow(IllegalStateException::new);
-       vehicleRepo.deleteById(vin);
+       vehicleRepository.deleteById(vin);
     }
 
     public Vehicle findVehicleByVinService(String vin) {
-        return vehicleRepo.findById(vin)
+        return vehicleRepository.findById(vin)
                 .orElseThrow(IllegalStateException::new);
     }
 
     public List<Vehicle> findVehiclesByLocService(String loc) {
         List<Vehicle> vehicles = new ArrayList<>();
-        vehicles = vehicleRepo.findVehiclesByLoc(loc);
+        vehicles = vehicleRepository.findVehiclesByLoc(loc);
         // TODO: Validate loc from locations table
 //        if () {
 //            throw new IllegalStateException();
@@ -53,11 +53,11 @@ public class VehicleService {
     }
 
     public void updateVehicleService(String vin, Vehicle vehicle) {
-        Vehicle existingVehicle = vehicleRepo.findById(vin)
+        Vehicle existingVehicle = vehicleRepository.findById(vin)
                 .orElseThrow(IllegalStateException::new);
 
         existingVehicle.setLoc_code(vehicle.getLoc_code());
-        vehicleRepo.save(existingVehicle);
+        vehicleRepository.save(existingVehicle);
     }
 
 }

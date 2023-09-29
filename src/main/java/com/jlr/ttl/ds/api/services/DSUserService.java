@@ -1,7 +1,6 @@
 package com.jlr.ttl.ds.api.services;
 
 import com.jlr.ttl.ds.api.annotation.TrackExecutionTime;
-import com.jlr.ttl.ds.api.dto.Vehicle;
 import com.jlr.ttl.ds.api.dto.entity.DSUser;
 import com.jlr.ttl.ds.api.dto.request.DSUserRequest;
 import com.jlr.ttl.ds.api.dto.response.DSUserResponse;

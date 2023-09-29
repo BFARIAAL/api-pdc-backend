@@ -1,6 +1,7 @@
-package com.jlr.ttl.ds.api.dto;
+package com.jlr.ttl.ds.api.dto.entity;
 
 import jakarta.persistence.*;
+import jakarta.persistence.Entity;
 
 @Entity
 @Table(name = "vehicles")
