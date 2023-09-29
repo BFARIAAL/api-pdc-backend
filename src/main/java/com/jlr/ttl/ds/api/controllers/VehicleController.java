@@ -1,7 +1,7 @@
 package com.jlr.ttl.ds.api.controllers;
 
-import com.jlr.ttl.ds.api.dto.Vehicle;
-import com.jlr.ttl.ds.api.repositories.VehicleRepo;
+import com.jlr.ttl.ds.api.dto.entity.Vehicle;
+import com.jlr.ttl.ds.api.repositories.VehicleRepository;
 import com.jlr.ttl.ds.api.services.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,7 +19,7 @@ public class VehicleController {
     @Autowired
     private VehicleService vehicleService;
     @Autowired
-    private VehicleRepo vehicleRepo;
+    private VehicleRepository vehicleRepository;
 
     @GetMapping("/all")
     public ResponseEntity<List<Vehicle>> getAllVehicles() {
