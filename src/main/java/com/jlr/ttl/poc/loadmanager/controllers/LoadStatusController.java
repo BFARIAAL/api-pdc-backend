@@ -12,20 +12,20 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path = "/load_status")
-public class Load_statusController {
+public class LoadStatusController {
 
     @Autowired
-    private LoadStatusService load_statusService;
+    private LoadStatusService loadStatusService;
 
     @GetMapping
     List<LoadStatus> getAllLoadStatus() {
-        return load_statusService.getAllLoadStatus();
+        return loadStatusService.getAllLoadStatus();
     }
 
     @PostMapping("/add-load_status")
     public ResponseEntity<String> addLoadStatus(@RequestBody LoadStatus newLoadStatus) {
         try {
-            load_statusService.addLoadStatus(newLoadStatus);
+            loadStatusService.addLoadStatus(newLoadStatus);
             return ResponseEntity.ok("Load_status added successfully");
         } catch (IllegalStateException e) {
             return ResponseEntity.status(HttpStatus.CONFLICT)
