@@ -11,26 +11,25 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/load_management/vehicles")
+@RequestMapping(path = "/vehicles")
 public class VehicleController {
 
     @Autowired
     private VehicleService vehicleService;
-    @Autowired
-    private VehicleRepo vehicleRepo;
 
     @GetMapping("/all")
     public ResponseEntity<List<Vehicle>> getAllVehicles() {
-        List<Vehicle> response = vehicleService.getAllVehiclesService();
+        List<Vehicle> response = vehicleService.getAllVehicles();
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @GetMapping("/by-vin/{vin}")
     public ResponseEntity<?> indexVehicle(@PathVariable(value = "vin") String vin) {
         try {
-            return ResponseEntity.ok(vehicleService.findVehicleByVinService(vin));
+            return ResponseEntity.ok(vehicleService.findVehicleByVin(vin));
         } catch (IllegalStateException e) {
-            return ResponseEntity.ok("Vehicle not existing!");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Vehicle not found!");
         }
     }
 
@@ -38,41 +37,45 @@ public class VehicleController {
     public ResponseEntity<?> findVehiclesByLoc(@PathVariable(value = "loc_code") String loc_code) {
 
         try {
-            return ResponseEntity.ok(vehicleService.findVehiclesByLocService(loc_code));
+            return ResponseEntity.ok(vehicleService.findVehiclesByLoc(loc_code));
         } catch (IllegalStateException e) {
-            return ResponseEntity.ok("Illegal location!");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Illegal location!");
         }
     }
 
     @PostMapping("/add-vehicle")
     public ResponseEntity<String> addVehicle(@RequestBody Vehicle vehicle) {
             try {
-                vehicleService.addNewVehicleService(vehicle);
+                vehicleService.addVehicle(vehicle);
                 return ResponseEntity.ok("Vehicle added successfully");
             } catch (IllegalStateException e) {
-                return ResponseEntity.ok("Vehicle already existed");
+                return ResponseEntity.status(HttpStatus.CONFLICT)
+                        .body("Vehicle existed!");
             }
     }
 
     @DeleteMapping("/del-vehicle/{vin}")
     public ResponseEntity<String> deleteVehicle(@PathVariable(value = "vin") String vin) {
             try {
-                vehicleService.deleteVehicleService(vin);
+                vehicleService.deleteVehicle(vin);
                 return ResponseEntity.ok("Vehicle deleted successfully");
             } catch (IllegalStateException e) {
-                return ResponseEntity.ok("Vehicle not existed!");
+                return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                        .body("Vehicle not found!");
             }
 
     }
 
-    @PutMapping("/edit-vehicle/{vin}")
-    public ResponseEntity<String> updateVehicle(@PathVariable(name = "vin") String vin, @RequestBody Vehicle vehicle) {
-            try {
-                vehicleService.updateVehicleService(vin, vehicle);
-                return ResponseEntity.ok("Vehicle updated successfully");
-            } catch (IllegalStateException e) {
-                return ResponseEntity.ok("Vehicle not existed!");
-            }
-    }
+//    @PutMapping("/edit-vehicle/{vin}")
+//    public ResponseEntity<String> updateVehicle(@PathVariable(name = "vin") String vin, @RequestBody Vehicle vehicle) {
+//            try {
+//                vehicleService.updateVehicleService(vin, vehicle);
+//                return ResponseEntity.ok("Vehicle updated successfully");
+//            } catch (IllegalStateException e) {
+//                return ResponseEntity.status(HttpStatus.NOT_FOUND)
+//                        .body("Vehicle not found!");
+//            }
+//    }
 
 }

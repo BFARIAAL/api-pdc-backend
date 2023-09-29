@@ -19,24 +19,11 @@ public class LocationService {
         this.locationRepo = locationRepo;
     }
 
-    public List<Location> getAllLocationService() { return locationRepo.findAll(); }
+    public List<Location> getAllLocations() { return locationRepo.findAll(); }
 
-    public Location findLocationService(String loc_code) {
+    public Location findLocation(String loc_code) {
         return locationRepo.findById(loc_code).
                 orElseThrow(IllegalStateException::new);
     }
 
-    public void addNewLocService(Location newLoc) {
-        Optional<Location> location = locationRepo.findById(newLoc.getLoc_code());
-        if (location.isPresent()) {
-            throw new IllegalStateException();
-        }
-        locationRepo.save(newLoc);
-    }
-
-    public void deleteLocService(String loc) {
-        locationRepo.findById(loc)
-                .orElseThrow(IllegalStateException::new);
-        locationRepo.deleteById(loc);
-    }
 }

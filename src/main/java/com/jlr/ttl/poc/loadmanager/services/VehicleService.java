@@ -19,30 +19,30 @@ public class VehicleService {
         this.vehicleRepo = vehicleRepo;
     }
 
-    public List<Vehicle> getAllVehiclesService() {
+    public List<Vehicle> getAllVehicles() {
         return vehicleRepo.findAll();
     }
 
-    public void addNewVehicleService(Vehicle vehicle) {
-        Optional<Vehicle> vehicleByVin = vehicleRepo.findById(vehicle.getVin().toString());
+    public void addVehicle(Vehicle vehicle) {
+        Optional<Vehicle> vehicleByVin = vehicleRepo.findById(vehicle.getVin());
         if (vehicleByVin.isPresent()) {
             throw new IllegalStateException();
         }
         vehicleRepo.save(vehicle);
     }
 
-    public void deleteVehicleService(String vin) {
+    public void deleteVehicle(String vin) {
        vehicleRepo.findById(vin)
                 .orElseThrow(IllegalStateException::new);
        vehicleRepo.deleteById(vin);
     }
 
-    public Vehicle findVehicleByVinService(String vin) {
+    public Vehicle findVehicleByVin(String vin) {
         return vehicleRepo.findById(vin)
                 .orElseThrow(IllegalStateException::new);
     }
 
-    public List<Vehicle> findVehiclesByLocService(String loc) {
+    public List<Vehicle> findVehiclesByLoc(String loc) {
         List<Vehicle> vehicles = new ArrayList<>();
         vehicles = vehicleRepo.findVehiclesByLoc(loc);
         // TODO: Validate loc from locations table
@@ -52,12 +52,12 @@ public class VehicleService {
         return vehicles;
     }
 
-    public void updateVehicleService(String vin, Vehicle vehicle) {
-        Vehicle existingVehicle = vehicleRepo.findById(vin)
-                .orElseThrow(IllegalStateException::new);
-
-        existingVehicle.setLoc_code(vehicle.getLoc_code());
-        vehicleRepo.save(existingVehicle);
-    }
+//    public void updateVehicleService(String vin, Vehicle vehicle) {
+//        Vehicle existingVehicle = vehicleRepo.findById(vin)
+//                .orElseThrow(IllegalStateException::new);
+//
+//        existingVehicle.setLoc_code(vehicle.getLoc_code());
+//        vehicleRepo.save(existingVehicle);
+//    }
 
 }

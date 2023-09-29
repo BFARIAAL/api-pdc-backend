@@ -2,29 +2,34 @@ package com.jlr.ttl.poc.loadmanager.controllers;
 
 
 import com.jlr.ttl.poc.loadmanager.models.Carrier;
-import com.jlr.ttl.poc.loadmanager.models.Load;
-import com.jlr.ttl.poc.loadmanager.repositories.CarrierRepo;
-import com.jlr.ttl.poc.loadmanager.repositories.LoadRepo;
 import com.jlr.ttl.poc.loadmanager.services.CarrierService;
-import com.jlr.ttl.poc.loadmanager.services.LoadService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/load_management/carriers")
+@RequestMapping(path = "/carriers")
 public class CarrierController {
     @Autowired
     private CarrierService carrierService;
-    @Autowired
-    private CarrierRepo carrierRepo;
 
     @GetMapping("/all")
     public List<Carrier> getAllCarriers() {
-        return carrierService.getAllCarriersService(carrierRepo);
+        return carrierService.getAllCarriers();
+    }
+
+    @PostMapping("/add-carrier")
+    public ResponseEntity<String> addNewCarrier(@RequestBody Carrier newCarrier) {
+        try {
+            carrierService.addCarrier(newCarrier);
+            return ResponseEntity.ok("Carrier added");
+        } catch (IllegalStateException e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT)
+                    .body("Carrier " + newCarrier.getCarrierRef() + " existed!");
+        }
     }
 
 }

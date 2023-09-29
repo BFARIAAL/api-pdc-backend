@@ -2,26 +2,47 @@ package com.jlr.ttl.poc.loadmanager.controllers;
 
 
 import com.jlr.ttl.poc.loadmanager.models.Load;
-import com.jlr.ttl.poc.loadmanager.repositories.LoadRepo;
 import com.jlr.ttl.poc.loadmanager.services.LoadService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/load_management/loads")
+@RequestMapping(path = "/loads")
 public class LoadController {
 
     @Autowired
     private LoadService loadService;
-    @Autowired
-    private LoadRepo loadRepo;
+
 
     @GetMapping("/all")
     public List<Load> getAllLoads() {
-        return loadService.getAllLoadsService(loadRepo);
+        return loadService.getAllLoads();
     }
+
+    @GetMapping("/find-load")
+    public ResponseEntity<?> indexLoad(@PathVariable(value = "load_ref") String load_ref) {
+        try {
+            return ResponseEntity.ok(loadService.findLoad(load_ref));
+        } catch (IllegalStateException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Load " + load_ref + " not found");
+        }
+    }
+
+    @PostMapping("/add-load")
+    public ResponseEntity<String> addLoad(@RequestBody Load newLoad) {
+        try {
+            loadService.addLoad(newLoad);
+            return ResponseEntity.ok("Load added successfully");
+        } catch (IllegalStateException e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT)
+                    .body("Load " + newLoad.getLoadRef() + " existed!");
+        }
+    }
+
+
 }

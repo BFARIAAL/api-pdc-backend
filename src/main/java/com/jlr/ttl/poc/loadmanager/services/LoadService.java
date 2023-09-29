@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class LoadService {
@@ -17,7 +18,20 @@ public class LoadService {
         this.loadRepo = loadRepo;
     }
 
-    public List<Load> getAllLoadsService(LoadRepo loadRepo) {
+    public List<Load> getAllLoads() {
         return loadRepo.findAll();
+    }
+
+    public void addLoad(Load newLoad) {
+        Optional<Load> load = loadRepo.findById(newLoad.getLoadRef());
+        if (load.isPresent()) {
+            throw new IllegalStateException();
+        }
+        loadRepo.save(newLoad);
+    }
+
+    public Load findLoad(String load_ref) {
+        return loadRepo.findById(load_ref).
+                orElseThrow(IllegalStateException::new);
     }
 }
