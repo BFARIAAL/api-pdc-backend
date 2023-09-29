@@ -2,6 +2,10 @@ package com.jlr.ttl.poc.loadmanager.models;
 
 import jakarta.persistence.*;
 
+ enum Status{
+    INTRANS, DLVRD, INLOAD, BUILT
+}
+
 @Entity
 @Table(name = "vehicles")
 public class Vehicle {
@@ -11,9 +15,13 @@ public class Vehicle {
     @Column(name = "loc_code")
     private String loc;
 
-    public Vehicle(Integer vin, String loc_code) {
+    @Column(name = "status")
+    private Status status;
+
+    public Vehicle(Integer vin, String loc_code, Status status) {
         this.vin = vin;
         this.loc = loc_code;
+        this.status = status;
     }
 
     public Vehicle() {
@@ -33,5 +41,13 @@ public class Vehicle {
 
     public void setLoc_code(String loc_code) {
         this.loc = loc_code;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 }
