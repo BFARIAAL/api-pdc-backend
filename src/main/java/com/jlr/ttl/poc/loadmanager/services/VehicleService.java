@@ -56,7 +56,7 @@ public class VehicleService {
         Vehicle existingVehicle = vehicleRepo.findById(vin)
                 .orElseThrow(IllegalStateException::new);
 
-        existingVehicle.setLoc_code(vehicle.getLoc_code());
+        existingVehicle = vehicle;
         vehicleRepo.save(existingVehicle);
     }
 
