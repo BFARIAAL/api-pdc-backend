@@ -13,12 +13,10 @@ public class Carrier {
     @Id
     @Column(name = "id")
     private String carrier_ref;
-
     @Column
     private String description;
 
-    public Carrier() {
-    }
+    public Carrier() {}
 
     public Carrier(String carrier_ref) {
         this.carrier_ref = carrier_ref;
