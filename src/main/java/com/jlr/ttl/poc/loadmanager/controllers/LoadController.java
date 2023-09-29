@@ -24,12 +24,12 @@ public class LoadController {
     }
 
     @GetMapping("/find-load")
-    public ResponseEntity<?> indexLoad(@PathVariable(value = "load_ref") String load_ref) {
+    public ResponseEntity<?> indexLoad(@PathVariable(value = "loadRef") String loadRef) {
         try {
-            return ResponseEntity.ok(loadService.findLoad(load_ref));
+            return ResponseEntity.ok(loadService.findLoad(loadRef));
         } catch (IllegalStateException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("Load " + load_ref + " not found");
+                    .body("Load " + loadRef + " not found");
         }
     }
 

@@ -21,13 +21,13 @@ public class LocationController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @GetMapping("/find_loc/{loc_code}")
-    public ResponseEntity<?> findLocation(@PathVariable(value = "loc_code") String loc_code) {
+    @GetMapping("/find_loc/{locCode}")
+    public ResponseEntity<?> findLocation(@PathVariable(value = "locCode") String locCode) {
         try {
-            return ResponseEntity.ok(locationService.findLocation(loc_code));
+            return ResponseEntity.ok(locationService.findLocation(locCode));
         } catch (IllegalStateException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("Location " + loc_code + " not found");
+                    .body("Location " + locCode + " not found");
         }
     }
 }

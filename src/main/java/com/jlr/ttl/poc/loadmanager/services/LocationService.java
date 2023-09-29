@@ -21,8 +21,8 @@ public class LocationService {
 
     public List<Location> getAllLocations() { return locationRepo.findAll(); }
 
-    public Location findLocation(String loc_code) {
-        return locationRepo.findById(loc_code).
+    public Location findLocation(String locCode) {
+        return locationRepo.findById(locCode).
                 orElseThrow(IllegalStateException::new);
     }
 

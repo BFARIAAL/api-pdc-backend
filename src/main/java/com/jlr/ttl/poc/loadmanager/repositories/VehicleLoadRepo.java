@@ -1,10 +1,10 @@
 package com.jlr.ttl.poc.loadmanager.repositories;
 
-import com.jlr.ttl.poc.loadmanager.models.Vehicle_Load;
+import com.jlr.ttl.poc.loadmanager.models.VehicleLoad;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface Vehicle_loadRepo
-        extends JpaRepository<Vehicle_Load, Integer> {
+public interface VehicleLoadRepo
+        extends JpaRepository<VehicleLoad, Integer> {
 }

@@ -1,8 +1,8 @@
 package com.jlr.ttl.poc.loadmanager.controllers;
 
 
-import com.jlr.ttl.poc.loadmanager.models.Load_status;
-import com.jlr.ttl.poc.loadmanager.services.Load_statusService;
+import com.jlr.ttl.poc.loadmanager.models.LoadStatus;
+import com.jlr.ttl.poc.loadmanager.services.LoadStatusService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,21 +15,21 @@ import java.util.List;
 public class Load_statusController {
 
     @Autowired
-    private Load_statusService load_statusService;
+    private LoadStatusService load_statusService;
 
     @GetMapping
-    List<Load_status> getAllLoad_status() {
-        return load_statusService.getAllLoad_status();
+    List<LoadStatus> getAllLoadStatus() {
+        return load_statusService.getAllLoadStatus();
     }
 
     @PostMapping("/add-load_status")
-    public ResponseEntity<String> addLoad_status(@RequestBody Load_status newLoad_status) {
+    public ResponseEntity<String> addLoadStatus(@RequestBody LoadStatus newLoadStatus) {
         try {
-            load_statusService.addLoad_status(newLoad_status);
+            load_statusService.addLoadStatus(newLoadStatus);
             return ResponseEntity.ok("Load_status added successfully");
         } catch (IllegalStateException e) {
             return ResponseEntity.status(HttpStatus.CONFLICT)
-                .body("Load_status " + newLoad_status.getStatusCode() + " existed!");
+                .body("load_status " + newLoadStatus.getStatusCode() + " existed!");
         }
     }
 }

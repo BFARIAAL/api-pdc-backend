@@ -9,19 +9,23 @@ import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "load_status")
-public class Load_status {
+@Table(name = "vehicle_loads")
+public class VehicleLoad {
 
     @Id
-    @Column(name = "id")
-    private String statusCode;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
-    private String description;
+    @Column(name = "veh")
+    private Integer vehicleId;
+
+    private String loadRef;
 
     @Column(name = "end_date")
     private Date endDate;

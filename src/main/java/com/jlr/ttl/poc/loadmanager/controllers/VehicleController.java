@@ -33,11 +33,11 @@ public class VehicleController {
         }
     }
 
-    @GetMapping("/by-loc/{loc_code}")
-    public ResponseEntity<?> findVehiclesByLoc(@PathVariable(value = "loc_code") String loc_code) {
+    @GetMapping("/by-loc/{locCode}")
+    public ResponseEntity<?> findVehiclesByLoc(@PathVariable(value = "locCode") String locCode) {
 
         try {
-            return ResponseEntity.ok(vehicleService.findVehiclesByLoc(loc_code));
+            return ResponseEntity.ok(vehicleService.findVehiclesByLoc(locCode));
         } catch (IllegalStateException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("Illegal location!");
