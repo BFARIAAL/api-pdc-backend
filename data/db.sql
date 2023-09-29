@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `d42-api-pdc` /*!40100 DEFAULT CHARACTER SET latin1 */;
-USE `d42-api-pdc`;
 -- MySQL dump 10.13  Distrib 8.0.31, for Win64 (x86_64)
 --
 -- Host: localhost    Database: d42-api-pdc
@@ -40,6 +38,46 @@ LOCK TABLES `carrier` WRITE;
 /*!40000 ALTER TABLE `carrier` DISABLE KEYS */;
 INSERT INTO `carrier` VALUES ('ACUMEN','Acumen Distribution');
 /*!40000 ALTER TABLE `carrier` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ds_users`
+--
+
+DROP TABLE IF EXISTS `ds_users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ds_users` (
+  `id` varchar(8) NOT NULL COMMENT 'User''s CCSID',
+  `description` varchar(80) DEFAULT NULL COMMENT 'User''s name/description',
+  `last_updated` date NOT NULL COMMENT 'Date in which this entry was last updated',
+  `end_date` date DEFAULT NULL COMMENT 'A flag that if not null means the user has been archived',
+  `user_1_id` varchar(45) NOT NULL COMMENT 'ID of the last user that updated this user',
+  `scan_admin` varchar(1) DEFAULT 'N' COMMENT 'A flag to indicate if user is scan admin',
+  `scan_user` char(1) DEFAULT 'N' COMMENT 'A flag to indicate if user is scan user',
+  `privilege` int(11) DEFAULT NULL COMMENT 'A number that represents the user role',
+  `default_location` varchar(45) DEFAULT NULL COMMENT 'The code of the user''s default location',
+  `default_brand` varchar(5) DEFAULT NULL COMMENT 'The code of the user''s default brand',
+  `default_carrier` int(11) DEFAULT NULL COMMENT 'The ID of the user''s default carrier',
+  `user_group` int(11) NOT NULL DEFAULT '40' COMMENT 'The group the user is a part of',
+  `last_accessed` date DEFAULT NULL COMMENT 'NOT IN USE',
+  `default_language` varchar(5) NOT NULL DEFAULT 'en-GB' COMMENT 'The code for the user''s default language',
+  `password` varchar(45) NOT NULL COMMENT 'Stores the user password (FOR DEVELOPMENT PURPOSE ONLY)',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id_UNIQUE` (`id`),
+  KEY `user_1_id_idx` (`user_1_id`),
+  KEY `Fk_Loc_idx` (`default_location`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Table responsible for storing users';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ds_users`
+--
+
+LOCK TABLES `ds_users` WRITE;
+/*!40000 ALTER TABLE `ds_users` DISABLE KEYS */;
+INSERT INTO `ds_users` VALUES ('bfariaal','Bruno Faria Almeida','2023-07-05',NULL,'1','N','N',1,'SLC',NULL,NULL,40,'2023-08-09','en','test');
+/*!40000 ALTER TABLE `ds_users` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -200,4 +238,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-09-28 14:58:11
+-- Dump completed on 2023-09-29 16:05:59
