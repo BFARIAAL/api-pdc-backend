@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/api/load_management/loads")
+@RequestMapping(path = "/load_management/loads")
 public class LoadController {
 
     @Autowired

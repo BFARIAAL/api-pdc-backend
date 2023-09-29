@@ -18,8 +18,9 @@ public class Load {
     private String dest_loc;
     @Column
     private String status;
-//    @Column
-//    private Carrier carrier;
+
+    @Column
+    private Carrier carrier;
 
     @Column(name = "end_date")
     private Date date;
@@ -61,4 +62,23 @@ public class Load {
         this.status = status;
     }
 
+    public String getLoad_ref() {
+        return load_ref;
+    }
+
+    public Carrier getCarrier() {
+        return carrier;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setCarrier(Carrier carrier) {
+        this.carrier = carrier;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
 }
