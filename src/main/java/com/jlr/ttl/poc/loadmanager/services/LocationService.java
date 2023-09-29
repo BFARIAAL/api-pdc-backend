@@ -6,9 +6,10 @@ import com.jlr.ttl.poc.loadmanager.repositories.LocationRepo;
 import com.jlr.ttl.poc.loadmanager.repositories.VehicleRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.List;
-
+@CrossOrigin("http://localhost:4200")
 @Service
 public class LocationService {
 

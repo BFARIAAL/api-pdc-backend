@@ -4,11 +4,14 @@ import com.jlr.ttl.poc.loadmanager.models.Vehicle;
 import com.jlr.ttl.poc.loadmanager.repositories.VehicleRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+
+@CrossOrigin("http://localhost:4200")
 @Service
 public class VehicleService {
 
