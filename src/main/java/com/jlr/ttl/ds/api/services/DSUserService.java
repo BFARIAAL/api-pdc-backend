@@ -58,7 +58,6 @@ public class DSUserService {
      */
     @TrackExecutionTime
     public DSUserResponse logInUser(DSUserRequest dsUserRequest) throws ServiceBusinessException, IllegalAccessException {
-        //TODO Include UserNotFoundException handling
         try {
             DSUserResponse dsUserResponse = getUserByID(dsUserRequest);
             checkPassword(DSUserValueMapper.responseToEntity(dsUserResponse), dsUserRequest);
