@@ -17,5 +17,31 @@ public class Carrier {
     @Column
     private String description;
 
+    public Carrier() {
+    }
 
+    public Carrier(String carrier_ref) {
+        this.carrier_ref = carrier_ref;
+    }
+
+    public Carrier(String carrier_ref, String description) {
+        this.carrier_ref = carrier_ref;
+        this.description = description;
+    }
+
+    public String getCarrier_ref() {
+        return carrier_ref;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setCarrier_ref(String carrier_ref) {
+        this.carrier_ref = carrier_ref;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }
