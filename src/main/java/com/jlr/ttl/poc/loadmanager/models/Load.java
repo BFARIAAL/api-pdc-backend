@@ -18,8 +18,9 @@ public class Load {
     private String dest_loc;
     @Column
     private String status;
-    @Column
-    private Carrier carrier;
+//    @Column
+//    private Carrier carrier;
+
     @Column(name = "end_date")
     private Date date;
 
