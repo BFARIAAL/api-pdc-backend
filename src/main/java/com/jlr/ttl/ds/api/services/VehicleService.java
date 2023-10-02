@@ -1,63 +1,72 @@
 package com.jlr.ttl.ds.api.services;
 
+import com.jlr.ttl.ds.api.annotation.TrackExecutionTime;
 import com.jlr.ttl.ds.api.dto.entity.Vehicle;
+import com.jlr.ttl.ds.api.dto.response.VehicleResponse;
+import com.jlr.ttl.ds.api.dto.table.DSTableInterface;
+import com.jlr.ttl.ds.api.dto.table.VehiclesTable;
+import com.jlr.ttl.ds.api.exception.ServiceBusinessException;
+import com.jlr.ttl.ds.api.exception.data.VehicleNotFoundException;
 import com.jlr.ttl.ds.api.repositories.VehicleRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.jlr.ttl.ds.api.util.mapper.VehicleValueMapper;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
+@AllArgsConstructor
+@Slf4j
 public class VehicleService {
 
-    @Autowired
-    private final VehicleRepository vehicleRepository;
+    private VehicleRepository vehicleRepository;
 
-    public VehicleService(VehicleRepository vehicleRepository) {
-        this.vehicleRepository = vehicleRepository;
-    }
+    /**
+     * Fetch the vehicle by the id passed
+     *
+     * @return Vehicle
+     * @since v1
+     */
 
-    public List<Vehicle> getAllVehiclesService() {
-        return vehicleRepository.findAll();
-    }
-
-    public void addNewVehicleService(Vehicle vehicle) {
-        Optional<Vehicle> vehicleByVin = vehicleRepository.findById(vehicle.getVin().toString());
-        if (vehicleByVin.isPresent()) {
-            throw new IllegalStateException();
+    @TrackExecutionTime
+    public VehicleResponse getVehicleByID(String id) throws ServiceBusinessException {
+        if(id==null || id.length()==0){
+            String errorMessage = "No vehicle id was provided";
+            log.warn(errorMessage);
+            throw new IllegalArgumentException(errorMessage);
         }
-        vehicleRepository.save(vehicle);
+        try {
+            DSTableInterface<Vehicle> dbResponse = vehicleRepository.findById(id)
+                    .orElseThrow(() -> new VehicleNotFoundException("No vehicle with ID : " + id + " was found"));
+            return VehicleValueMapper.entityToResponse(dbResponse.createEntity());
+        }catch (VehicleNotFoundException vehicleNotFoundException){
+            String errorMessage = vehicleNotFoundException.getMessage();
+            log.warn(errorMessage);
+            throw new VehicleNotFoundException(errorMessage);
+        }catch (Exception ex) {
+            throw new ServiceBusinessException("Exception occurred while fetching vehicle with id : " + id);
+        }
     }
 
-    public void deleteVehicleService(String vin) {
-       vehicleRepository.findById(vin)
-                .orElseThrow(IllegalStateException::new);
-       vehicleRepository.deleteById(vin);
-    }
+    /**
+     * Getting all the vehicles from database.
+     * @return a list of VehicleResponse
+     */
+    public List<VehicleResponse> getAllVehicles() throws ServiceBusinessException {
+        try {
+            List<VehiclesTable> dbResponse = vehicleRepository.findAll();
 
-    public Vehicle findVehicleByVinService(String vin) {
-        return vehicleRepository.findById(vin)
-                .orElseThrow(IllegalStateException::new);
-    }
-
-    public List<Vehicle> findVehiclesByLocService(String loc) {
-        List<Vehicle> vehicles = new ArrayList<>();
-        vehicles = vehicleRepository.findVehiclesByLoc(loc);
-        // TODO: Validate loc from locations table
-//        if () {
-//            throw new IllegalStateException();
-//        }
-        return vehicles;
-    }
-
-    public void updateVehicleService(String vin, Vehicle vehicle) {
-        Vehicle existingVehicle = vehicleRepository.findById(vin)
-                .orElseThrow(IllegalStateException::new);
-
-        existingVehicle.setLoc_code(vehicle.getLoc_code());
-        vehicleRepository.save(existingVehicle);
+            List<VehicleResponse> finalList = new ArrayList<VehicleResponse>();
+            log.info("Retrieved data from database, transforming to response");
+            for(VehiclesTable v : dbResponse) {
+                finalList.add(VehicleValueMapper.entityToResponse(v.createEntity()));
+            }
+            return finalList;
+        }catch (Exception ex) {
+            throw new ServiceBusinessException("Exception occurred while fetching vehicles");
+        }
     }
 
 }
