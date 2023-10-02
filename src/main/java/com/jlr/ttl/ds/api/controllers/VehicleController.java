@@ -26,6 +26,7 @@ public class VehicleController {
     public ResponseEntity<DSResponse<List<VehicleResponse>>> getAllVehicles() {
         List<VehicleResponse> dsVehicleResponse = null;
         try{
+
             dsVehicleResponse = vehicleService.getAllVehicles();
         }catch (ServiceBusinessException serviceBusinessException) {
             return new ResponseEntity<>(DSResponse
