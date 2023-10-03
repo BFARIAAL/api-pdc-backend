@@ -26,7 +26,6 @@ public class VehicleController {
     public ResponseEntity<DSResponse<List<VehicleResponse>>> getAllVehicles() {
         List<VehicleResponse> dsVehicleResponse = null;
         try{
-
             dsVehicleResponse = vehicleService.getAllVehicles();
         }catch (ServiceBusinessException serviceBusinessException) {
             return new ResponseEntity<>(DSResponse
@@ -43,9 +42,7 @@ public class VehicleController {
 
     @GetMapping("/by_id/{id}")
     public ResponseEntity<DSResponse<VehicleResponse>> getVehicleById(@PathVariable(value = "id") String id){
-
         VehicleResponse vehicleResponse = null;
-
         try {
             vehicleResponse = vehicleService.getVehicleByID(id);
         } catch (IllegalStateException illegalStateException) {
@@ -65,5 +62,4 @@ public class VehicleController {
                 .results(vehicleResponse)
                 .build(), HttpStatus.OK);
     }
-
 }
