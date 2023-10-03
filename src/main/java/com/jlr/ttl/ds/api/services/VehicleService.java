@@ -46,7 +46,7 @@ public class VehicleService {
             log.warn(errorMessage);
             throw new VehicleNotFoundException(errorMessage);
         }catch (Exception ex) {
-            throw new ServiceBusinessException("Exception occurred while fetching vehicle with id : " + id);
+            throw new IllegalArgumentException("Exception occurred while fetching vehicle with id : " + id);
         }
     }
 
@@ -54,51 +54,18 @@ public class VehicleService {
      * Getting all the vehicles from database.
      * @return a list of VehicleResponse
      */
-    @TrackExecutionTime
     public List<VehicleResponse> getAllVehicles() throws ServiceBusinessException {
         try {
             List<VehiclesTable> dbResponse = vehicleRepository.findAll();
 
-            List<VehicleResponse> finalList = new ArrayList<VehicleResponse>();
+            List<VehicleResponse> listOfVehicleResponse = new ArrayList<VehicleResponse>();
             log.info("Retrieved data from database, transforming to response");
             for(VehiclesTable v : dbResponse) {
-                finalList.add(VehicleValueMapper.entityToResponse(v.createEntity()));
+                listOfVehicleResponse.add(VehicleValueMapper.entityToResponse(v.createEntity()));
             }
-            return finalList;
+            return listOfVehicleResponse;
         }catch (Exception ex) {
             throw new ServiceBusinessException("Exception occurred while fetching vehicles");
         }
     }
-
-    @TrackExecutionTime
-    public List<VehicleResponse> addVehiclesByLoc(String locCode) throws ServiceBusinessException {
-        try {
-            List<VehiclesTable> dbResponse = vehicleRepository.findAll();
-
-            List<VehicleResponse> finalList = new ArrayList<VehicleResponse>();
-            log.info("Retrieved data from database, transforming to response");
-            for(VehiclesTable v : dbResponse) {
-                finalList.add(VehicleValueMapper.entityToResponse(v.createEntity()));
-            }
-            return finalList;
-        }catch (Exception ex) {
-            throw new ServiceBusinessException("Exception occurred while fetching vehicles");
-        }
-    }
-
-//    public List<VehicleResponse> getVehiclesByLoc(String locCode) throws ServiceBusinessException {
-//        try {
-//            List<VehiclesTable> dbResponse = vehicleRepository.getVehiclesByLoc(locCode);
-//
-//            List<VehicleResponse> finalList = new ArrayList<VehicleResponse>();
-//            log.info("Retrieved data from database, transforming to response");
-//            for(VehiclesTable v : dbResponse) {
-//                finalList.add(VehicleValueMapper.entityToResponse(v.createEntity()));
-//            }
-//            return finalList;
-//        }catch (Exception ex) {
-//            throw new ServiceBusinessException("Exception occurred while fetching vehicles");
-//        }
-//    }
-
 }
