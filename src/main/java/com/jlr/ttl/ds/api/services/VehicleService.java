@@ -46,7 +46,7 @@ public class VehicleService {
             log.warn(errorMessage);
             throw new VehicleNotFoundException(errorMessage);
         }catch (Exception ex) {
-            throw new IllegalStateException("Exception occurred while fetching vehicle with id : " + id);
+            throw new ServiceBusinessException("Exception occurred while fetching vehicle with id : " + id);
         }
     }
 

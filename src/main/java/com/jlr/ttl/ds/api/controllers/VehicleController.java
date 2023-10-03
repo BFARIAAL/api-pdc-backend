@@ -26,7 +26,6 @@ public class VehicleController {
     public ResponseEntity<DSResponse<List<VehicleResponse>>> getAllVehicles() {
         List<VehicleResponse> dsVehicleResponse = null;
         try{
-
             dsVehicleResponse = vehicleService.getAllVehicles();
         }catch (ServiceBusinessException serviceBusinessException) {
             return new ResponseEntity<>(DSResponse
@@ -46,7 +45,7 @@ public class VehicleController {
         VehicleResponse vehicleResponse = null;
         try {
             vehicleResponse = vehicleService.getVehicleByID(id);
-        } catch (IllegalStateException illegalStateException) {
+        } catch (ServiceBusinessException serviceBusinessException) {
             return new ResponseEntity<>(DSResponse
                     .<VehicleResponse>builder()
                     .status(DSConstants.STATUS_FAILED)
