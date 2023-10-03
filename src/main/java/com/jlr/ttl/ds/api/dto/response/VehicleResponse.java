@@ -13,10 +13,9 @@ import java.sql.Date;
 @NoArgsConstructor
 @EqualsAndHashCode
 public class VehicleResponse implements DSResponseInterface<Vehicle> {
+
     private String id;
     private String vin;
     private String locCode;
     private Date endDate;
-
-
 }

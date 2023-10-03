@@ -43,9 +43,7 @@ public class VehicleController {
 
     @GetMapping("/by_id/{id}")
     public ResponseEntity<DSResponse<VehicleResponse>> getVehicleById(@PathVariable(value = "id") String id){
-
         VehicleResponse vehicleResponse = null;
-
         try {
             vehicleResponse = vehicleService.getVehicleByID(id);
         } catch (IllegalStateException illegalStateException) {
@@ -65,5 +63,4 @@ public class VehicleController {
                 .results(vehicleResponse)
                 .build(), HttpStatus.OK);
     }
-
 }
