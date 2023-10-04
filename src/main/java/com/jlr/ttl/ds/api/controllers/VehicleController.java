@@ -49,7 +49,8 @@ public class VehicleController {
             return new ResponseEntity<>(DSResponse
                     .<VehicleResponse>builder()
                     .status(DSConstants.STATUS_FAILED)
-                    .build(), HttpStatus.BAD_REQUEST);
+                    .build(), HttpStatus.INTERNAL_SERVER_ERROR
+            );
         } catch (VehicleNotFoundException vehicleNotFoundException){
             return new ResponseEntity<>(DSResponse
                     .<VehicleResponse>builder()
