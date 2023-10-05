@@ -34,7 +34,7 @@ public class VehicleService {
     public VehicleResponse getVehicleByID(String id) throws ServiceBusinessException {
         if(id==null || id.length()==0){
             String errorMessage = "No vehicle id was provided";
-            //log.warn(errorMessage);
+            log.warn(errorMessage);
             throw new IllegalArgumentException(errorMessage);
         }
         try {
@@ -43,7 +43,7 @@ public class VehicleService {
             return VehicleValueMapper.entityToResponse(dbResponse.createEntity());
         }catch (VehicleNotFoundException vehicleNotFoundException){
             String errorMessage = vehicleNotFoundException.getMessage();
-            //log.warn(errorMessage);
+            log.warn(errorMessage);
             throw new VehicleNotFoundException(errorMessage);
         }catch (Exception ex) {
             throw new ServiceBusinessException("Exception occurred while fetching vehicle with id : " + id);
