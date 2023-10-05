@@ -4,7 +4,15 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Data
 @Entity
 @Table(name = "locations")
 public class Location {
@@ -14,17 +22,4 @@ public class Location {
     @Column(name = "description")
     private String lDescription;
 
-    public Location(String lId, String lDescription) {
-        this.lId = lId;
-        this.lDescription = lDescription;
-    }
-
-    public Location(){}
-    public String getlId() {
-        return lId;
-    }
-
-    public String getlDescription() {
-        return lDescription;
-    }
 }
