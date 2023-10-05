@@ -28,14 +28,9 @@ public class LocationController {
     @GetMapping("/all")
     public ResponseEntity<List<Location>> getAllLocations() {
         List<Location> response = locationService.getAllLocationService();
-        try {
+
             return new ResponseEntity<>(response, HttpStatus.OK);
-        } catch (IllegalStateException e) {
-            return new ResponseEntity<>(DSResponse
-                    .<DSUserResponse>builder()
-                    .status(DSConstants.STATUS_FAILED)
-                    .build(), HttpStatus.NOT_FOUND);
-        }
+
 
 
     }
