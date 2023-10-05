@@ -1,38 +1,20 @@
 package com.jlr.ttl.ds.api.dto.entity;
 
-import jakarta.persistence.*;
-import jakarta.persistence.Entity;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Entity
-@Table(name = "vehicles")
-public class Vehicle {
-    @Id
-    @Column(name="id")
-    private Integer vin;
-    @Column(name = "loc_code")
-    private String loc;
+import java.sql.Date;
 
-    public Vehicle(Integer vin, String loc_code) {
-        this.vin = vin;
-        this.loc = loc_code;
-    }
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Data
+public class Vehicle implements Entity<Vehicle> {
 
-    public Vehicle() {
-    }
-
-    public Vehicle(Integer vin) {
-        this.vin = vin;
-    }
-
-    public Integer getVin() {
-        return vin;
-    }
-
-    public String getLoc_code() {
-        return loc;
-    }
-
-    public void setLoc_code(String loc_code) {
-        this.loc = loc_code;
-    }
+    private String id;
+    private String vin;
+    private String locCode;
+    private Date endDate;
 }
