@@ -26,10 +26,8 @@ import java.util.List;
 @AllArgsConstructor
 @Slf4j
 public class LocationService {
+    
     private LocationRepository locationRepository;
-
-
-
 
     /**
      * Getting all the locations from database.
@@ -38,7 +36,6 @@ public class LocationService {
     public List<LocationResponse> getAllLocations() throws ServiceBusinessException {
         try {
             List<LocationsTable> dbResponse = locationRepository.findAll();
-
             List<LocationResponse> listOfLocationResponse = new ArrayList<LocationResponse>();
             log.info("Retrieved data from database, transforming to response");
             for(LocationsTable l : dbResponse) {
@@ -50,18 +47,11 @@ public class LocationService {
         }
     }
 
-
-
-
-
-
-
     /**
      * Fetch the location by the id passed
      *
      * @return Location
      */
-
     @TrackExecutionTime
     public LocationResponse getLocationByID(String id) throws ServiceBusinessException {
         if(id==null || id.length()==0){
@@ -81,6 +71,4 @@ public class LocationService {
             throw new ServiceBusinessException("Exception occurred while fetching location with id : " + id);
         }
     }
-
-
 }
