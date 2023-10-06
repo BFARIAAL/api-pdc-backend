@@ -15,10 +15,6 @@ import java.sql.Date;
 public class Location {
 
     private String id;
-
     private String description;
-
-
     private Date endDate;
-
 }
