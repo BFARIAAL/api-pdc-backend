@@ -31,8 +31,11 @@ public class VehiclesTable implements DSTableInterface<Vehicle>{
     @Column(name = "end_date")
     private Date endDate;
 
+    @Column(name = "status")
+    private String status;
+
     @Override
     public Vehicle createEntity() {
-        return new Vehicle(id, vin, locCode, endDate);
+        return new Vehicle(id, vin, locCode, endDate, status);
     }
 }
