@@ -23,11 +23,11 @@ import java.util.List;
 @CrossOrigin("http://localhost:4200")
 public class LocationController {
 
-
     private LocationService locationService;
 
     /**
      * Getting all the locations from database.
+     *
      * @return a list of LocationResponse
      */
     @GetMapping("/all")
@@ -47,9 +47,6 @@ public class LocationController {
                 .results(locationResponse)
                 .build(), HttpStatus.OK);
     }
-
-
-
 
     /**
      * Fetch the location by the id passed
@@ -79,5 +76,4 @@ public class LocationController {
                 .results(locationResponse)
                 .build(), HttpStatus.OK);
     }
-
 }
