@@ -7,11 +7,11 @@ import com.jlr.ttl.ds.api.dto.response.VehicleResponse;
 public class VehicleValueMapper implements DSValueMapper<Vehicle, VehicleResponse, VehicleRequest> {
 
     public static Vehicle responseToEntity(VehicleResponse dsVehicleResponse){
-        return new Vehicle(dsVehicleResponse.getId(), dsVehicleResponse.getVin(), dsVehicleResponse.getLocCode(), dsVehicleResponse.getEndDate());
+        return new Vehicle(dsVehicleResponse.getId(), dsVehicleResponse.getVin(), dsVehicleResponse.getLocCode(), dsVehicleResponse.getEndDate(), dsVehicleResponse.getStatus());
     }
 
     public static VehicleResponse entityToResponse(Vehicle vehicle){
-        return new VehicleResponse(vehicle.getId(), vehicle.getVin(), vehicle.getLocCode(), vehicle.getEndDate());
+        return new VehicleResponse(vehicle.getId(), vehicle.getVin(), vehicle.getLocCode(), vehicle.getEndDate(), vehicle.getStatus());
     }
 
 }
