@@ -2,65 +2,78 @@ package com.jlr.ttl.ds.api.controllers;
 
 import com.jlr.ttl.ds.api.constants.DSConstants;
 import com.jlr.ttl.ds.api.dto.DSResponse;
-import com.jlr.ttl.ds.api.dto.response.VehicleResponse;
+import com.jlr.ttl.ds.api.dto.entity.Location;
+import com.jlr.ttl.ds.api.dto.response.DSUserResponse;
+import com.jlr.ttl.ds.api.dto.response.LocationResponse;
 import com.jlr.ttl.ds.api.exception.ServiceBusinessException;
+import com.jlr.ttl.ds.api.exception.data.LocationNotFoundException;
+import com.jlr.ttl.ds.api.exception.data.UserNotFoundException;
 import com.jlr.ttl.ds.api.exception.data.VehicleNotFoundException;
-import com.jlr.ttl.ds.api.services.VehicleService;
+import com.jlr.ttl.ds.api.services.LocationService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.List;
 
-@RestController
 @AllArgsConstructor
-@RequestMapping(path = "/v1/vehicles")
+@RestController
+@RequestMapping(path = "/v1/locations")
 @CrossOrigin("http://localhost:4200")
-public class VehicleController {
+public class LocationController {
 
-    private VehicleService vehicleService;
+    private LocationService locationService;
 
+    /**
+     * Getting all the locations from database.
+     *
+     * @return a list of LocationResponse
+     */
     @GetMapping("/all")
-    public ResponseEntity<DSResponse<List<VehicleResponse>>> getAllVehicles() {
-        List<VehicleResponse> dsVehicleResponse = null;
+    public ResponseEntity<DSResponse<List<LocationResponse>>> getAllLocations() {
+        List<LocationResponse> locationResponse = null;
         try{
-            dsVehicleResponse = vehicleService.getAllVehicles();
+            locationResponse = locationService.getAllLocations();
         }catch (ServiceBusinessException serviceBusinessException) {
             return new ResponseEntity<>(DSResponse
-                    .<List<VehicleResponse>>builder()
+                    .<List<LocationResponse>>builder()
                     .status(DSConstants.STATUS_FAILED)
                     .build(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
         return new ResponseEntity<>(DSResponse
-                .<List<VehicleResponse>>builder()
+                .<List<LocationResponse>>builder()
                 .status(DSConstants.STATUS_SUCCESS)
-                .results(dsVehicleResponse)
+                .results(locationResponse)
                 .build(), HttpStatus.OK);
     }
 
+    /**
+     * Fetch the location by the id passed
+     *
+     * @return Location
+     */
     @GetMapping("/by_id/{id}")
-    public ResponseEntity<DSResponse<VehicleResponse>> getVehicleById(@PathVariable(value = "id") String id){
-        VehicleResponse vehicleResponse = null;
+    public ResponseEntity<DSResponse<LocationResponse>> getLocationById(@PathVariable(value = "id") String id){
+        LocationResponse locationResponse = null;
         try {
-            vehicleResponse = vehicleService.getVehicleByID(id);
+            locationResponse = locationService.getLocationByID(id);
         } catch (ServiceBusinessException serviceBusinessException) {
             return new ResponseEntity<>(DSResponse
-                    .<VehicleResponse>builder()
+                    .<LocationResponse>builder()
                     .status(DSConstants.STATUS_FAILED)
                     .build(), HttpStatus.INTERNAL_SERVER_ERROR
             );
-        } catch (VehicleNotFoundException vehicleNotFoundException){
+        } catch (LocationNotFoundException locationNotFoundException){
             return new ResponseEntity<>(DSResponse
-                    .<VehicleResponse>builder()
+                    .<LocationResponse>builder()
                     .status(DSConstants.STATUS_FAILED)
                     .build(), HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(DSResponse
-                .<VehicleResponse>builder()
+                .<LocationResponse>builder()
                 .status(DSConstants.STATUS_SUCCESS)
-                .results(vehicleResponse)
+                .results(locationResponse)
                 .build(), HttpStatus.OK);
     }
 }
