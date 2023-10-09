@@ -1,19 +1,12 @@
 package com.jlr.ttl.ds.api.services;
 
 import com.jlr.ttl.ds.api.annotation.TrackExecutionTime;
-import com.jlr.ttl.ds.api.dto.entity.Location;
-import com.jlr.ttl.ds.api.dto.entity.LocationType;
-import com.jlr.ttl.ds.api.dto.response.LocationResponse;
-import com.jlr.ttl.ds.api.dto.response.LocationTypeResponse;
 import com.jlr.ttl.ds.api.dto.table.DSTableInterface;
-import com.jlr.ttl.ds.api.dto.table.LocationTypeTable;
-import com.jlr.ttl.ds.api.dto.table.LocationsTable;
 import com.jlr.ttl.ds.api.exception.ServiceBusinessException;
 import com.jlr.ttl.ds.api.exception.data.LocationNotFoundException;
 import com.jlr.ttl.ds.api.exception.data.LocationTypeNotFoundException;
 import com.jlr.ttl.ds.api.repositories.LocationTypeRepository;
 import com.jlr.ttl.ds.api.util.mapper.LocationTypeValueMapper;
-import com.jlr.ttl.ds.api.util.mapper.LocationValueMapper;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
