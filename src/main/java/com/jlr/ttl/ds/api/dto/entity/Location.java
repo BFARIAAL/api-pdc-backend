@@ -12,9 +12,10 @@ import java.sql.Date;
 @AllArgsConstructor
 @Builder
 @Data
-public class Location {
+public class Location implements Entity<Location> {
 
     private String id;
+    private String locType;
     private String description;
     private Date endDate;
 }
