@@ -7,15 +7,15 @@ import lombok.NoArgsConstructor;
 
 import java.sql.Date;
 
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Data
-public class Vehicle implements Entity<Vehicle> {
+public class Location implements Entity<Location> {
 
     private String id;
-    private String vin;
-    private String locCode;
+    private String locType;
+    private String description;
     private Date endDate;
-    private String status;
 }

@@ -1,6 +1,6 @@
-package com.jlr.ttl.ds.api.dto.response;
+package com.jlr.ttl.ds.api.dto.request;
 
-import com.jlr.ttl.ds.api.dto.entity.Vehicle;
+import com.jlr.ttl.ds.api.dto.entity.Location;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -12,11 +12,10 @@ import java.sql.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
-public class VehicleResponse implements DSResponseInterface<Vehicle> {
+public class LocationRequest implements DSRequestInterface<Location> {
 
     private String id;
-    private String vin;
-    private String locCode;
+    private String locType;
+    private String description;
     private Date endDate;
-    private String status;
 }
