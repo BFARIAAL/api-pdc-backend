@@ -62,7 +62,7 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
                 }
 
                 if(!auth.isAuthenticated()){
-                        response.setStatus(HttpStatus.UNAUTHORIZED.value());
+                    response.setStatus(HttpStatus.UNAUTHORIZED.value());
                     response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Permissions invalid");
                     return;
                 }
@@ -71,6 +71,10 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
             } catch (JwtException e) {
                 throw new IllegalStateException("Invalid JWT");
             }
+        }else{
+            response.setStatus(HttpStatus.I_AM_A_TEAPOT.value());
+            response.sendError(HttpStatus.I_AM_A_TEAPOT.value(), "Not Authenticated");
+            return;
         }
 
 
