@@ -29,7 +29,6 @@ public class VehicleService {
      * @return Vehicle
      * @since v1
      */
-
     @TrackExecutionTime
     public VehicleResponse getVehicleByID(String id) throws ServiceBusinessException {
         if(id==null || id.length()==0){

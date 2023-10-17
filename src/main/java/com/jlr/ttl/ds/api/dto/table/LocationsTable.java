@@ -22,14 +22,19 @@ public class LocationsTable implements DSTableInterface<Location>{
     @Column(name = "id")
     private String id;
 
+    @Column(name = "loc_type")
+    private String locType;
+
     @Column(name = "description")
     private String description;
 
     @Column(name = "end_date")
     private Date endDate;
 
+    private Integer country;
+
     @Override
     public Location createEntity() {
-        return new Location(id, description, endDate);
+        return new Location(id, locType, description, endDate, country);
     }
 }
