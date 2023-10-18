@@ -31,8 +31,10 @@ public class LocationsTable implements DSTableInterface<Location>{
     @Column(name = "end_date")
     private Date endDate;
 
+    private Integer country;
+
     @Override
     public Location createEntity() {
-        return new Location(id, locType, description, endDate);
+        return new Location(id, locType, description, endDate, country);
     }
 }

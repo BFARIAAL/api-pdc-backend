@@ -27,9 +27,12 @@ CREATE TABLE `locations` (
   `loc_type` varchar(45) NOT NULL,
   `description` varchar(255) DEFAULT NULL,
   `end_date` date DEFAULT NULL,
+  `country` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`),
   KEY `loc_type` (`loc_type`),
+  KEY `country_idx` (`country`),
+  CONSTRAINT `country` FOREIGN KEY (`country`) REFERENCES `countries` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `loc_type` FOREIGN KEY (`loc_type`) REFERENCES `location_type` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -40,7 +43,7 @@ CREATE TABLE `locations` (
 
 LOCK TABLES `locations` WRITE;
 /*!40000 ALTER TABLE `locations` DISABLE KEYS */;
-INSERT INTO `locations` VALUES ('BDC','COMPOUND','Badesley Compound',NULL),('SLC','COMPOUND','Solihul Compound',NULL),('ZUKA','ZONE','Zone UK A',NULL);
+INSERT INTO `locations` VALUES ('BDC','COMPOUND','Badesley Compound',NULL,185),('SLC','COMPOUND','Solihul Compound',NULL,185),('ZUKA','ZONE','Zone UK A',NULL,185);
 /*!40000 ALTER TABLE `locations` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -53,4 +56,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-10-09 16:43:39
+-- Dump completed on 2023-10-17 18:17:07

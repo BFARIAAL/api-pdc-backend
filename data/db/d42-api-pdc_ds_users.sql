@@ -51,7 +51,7 @@ CREATE TABLE `ds_users` (
 
 LOCK TABLES `ds_users` WRITE;
 /*!40000 ALTER TABLE `ds_users` DISABLE KEYS */;
-INSERT INTO `ds_users` VALUES ('bfariaal','Bruno Faria Almeida','2023-07-05',NULL,'1','N','N',1,'SLC',NULL,NULL,40,'2023-08-09','en','test');
+INSERT INTO `ds_users` VALUES ('bfariaal','Bruno Faria Almeida','2023-07-05',NULL,'1','N','N',1,'SLC',NULL,NULL,40,'2023-08-09','en','test'),('hwang36','Haomeng Wang','2023-10-17',NULL,'1','N','N',1,'SLC',NULL,NULL,40,NULL,'en','test'),('pcorrei1','Pedro Correia de Sousa','2023-10-17',NULL,'1','N','N',1,'SLC',NULL,NULL,40,NULL,'en','test');
 /*!40000 ALTER TABLE `ds_users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -64,4 +64,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-10-09 16:43:42
+-- Dump completed on 2023-10-17 18:17:03
