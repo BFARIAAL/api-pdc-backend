@@ -1,4 +1,4 @@
-package com.jlr.ttl.ds.api.dto.authentication;
+package com.jlr.ttl.ds.api.authentication;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

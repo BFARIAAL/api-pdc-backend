@@ -1,6 +1,6 @@
-package com.jlr.ttl.ds.api;
+package com.jlr.ttl.ds.api.authentication;
 
-import com.jlr.ttl.ds.api.dto.authentication.JwtUtils;
+import com.jlr.ttl.ds.api.authentication.JwtUtils;
 
 
 /**

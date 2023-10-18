@@ -1,4 +1,4 @@
-package com.jlr.ttl.ds.api.dto.authentication;
+package com.jlr.ttl.ds.api.authentication;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
