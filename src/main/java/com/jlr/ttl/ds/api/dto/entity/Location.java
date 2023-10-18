@@ -18,4 +18,5 @@ public class Location implements Entity<Location> {
     private String locType;
     private String description;
     private Date endDate;
+    private Integer country;
 }
