@@ -1,13 +1,18 @@
 package com.jlr.ttl.ds.api.services;
 
 import com.jlr.ttl.ds.api.annotation.TrackExecutionTime;
+import com.jlr.ttl.ds.api.dto.entity.Location;
 import com.jlr.ttl.ds.api.dto.entity.Vehicle;
+import com.jlr.ttl.ds.api.dto.response.LocationResponse;
 import com.jlr.ttl.ds.api.dto.response.VehicleResponse;
 import com.jlr.ttl.ds.api.dto.table.DSTableInterface;
 import com.jlr.ttl.ds.api.dto.table.VehiclesTable;
 import com.jlr.ttl.ds.api.exception.ServiceBusinessException;
+import com.jlr.ttl.ds.api.exception.data.LocationNotFoundException;
 import com.jlr.ttl.ds.api.exception.data.VehicleNotFoundException;
+import com.jlr.ttl.ds.api.repositories.LocationRepository;
 import com.jlr.ttl.ds.api.repositories.VehicleRepository;
+import com.jlr.ttl.ds.api.util.mapper.LocationValueMapper;
 import com.jlr.ttl.ds.api.util.mapper.VehicleValueMapper;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,6 +27,7 @@ import java.util.List;
 public class VehicleService {
 
     private VehicleRepository vehicleRepository;
+    private LocationRepository locationRepository;
 
     /**
      * Fetch the vehicle by the id passed
@@ -30,7 +36,7 @@ public class VehicleService {
      * @since v1
      */
     @TrackExecutionTime
-    public VehicleResponse getVehicleByID(String id) throws ServiceBusinessException {
+    public VehicleResponse getVehicleByID(String id, List<String> info) throws ServiceBusinessException {
         if(id==null || id.length()==0){
             String errorMessage = "No vehicle id was provided";
             log.warn(errorMessage);
@@ -39,7 +45,17 @@ public class VehicleService {
         try {
             DSTableInterface<Vehicle> dbResponse = vehicleRepository.findById(id)
                     .orElseThrow(() -> new VehicleNotFoundException("No vehicle with ID : " + id + " was found"));
-            return VehicleValueMapper.entityToResponse(dbResponse.createEntity());
+            VehicleResponse vehicleResponse = VehicleValueMapper.entityToResponse(dbResponse.createEntity());
+            // Check request parameters
+            if (info.contains("location")) {
+                // Find location of the vehicle
+                String locCode = vehicleResponse.getLocCode();
+                DSTableInterface<Location> lcResponse = locationRepository.findById(locCode).orElseThrow(
+                        () -> new LocationNotFoundException("No location with location code : " + locCode + " was found")
+                );
+                vehicleResponse.setLocationResponse(LocationValueMapper.entityToResponse(lcResponse.createEntity()));
+            }
+            return vehicleResponse;
         }catch (VehicleNotFoundException vehicleNotFoundException){
             String errorMessage = vehicleNotFoundException.getMessage();
             log.warn(errorMessage);

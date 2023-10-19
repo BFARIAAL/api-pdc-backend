@@ -11,7 +11,7 @@ public class VehicleValueMapper implements DSValueMapper<Vehicle, VehicleRespons
     }
 
     public static VehicleResponse entityToResponse(Vehicle vehicle){
-        return new VehicleResponse(vehicle.getId(), vehicle.getVin(), vehicle.getLocCode(), vehicle.getEndDate(), vehicle.getStatus());
+        return new VehicleResponse(vehicle.getId(), vehicle.getVin(), vehicle.getLocCode(), vehicle.getEndDate(), vehicle.getStatus(), null);
     }
 
 }

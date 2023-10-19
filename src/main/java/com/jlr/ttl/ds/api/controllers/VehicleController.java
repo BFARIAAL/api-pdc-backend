@@ -2,6 +2,7 @@ package com.jlr.ttl.ds.api.controllers;
 
 import com.jlr.ttl.ds.api.constants.DSConstants;
 import com.jlr.ttl.ds.api.dto.DSResponse;
+import com.jlr.ttl.ds.api.dto.response.DSResponseInterface;
 import com.jlr.ttl.ds.api.dto.response.VehicleResponse;
 import com.jlr.ttl.ds.api.exception.ServiceBusinessException;
 import com.jlr.ttl.ds.api.exception.data.VehicleNotFoundException;
@@ -40,18 +41,19 @@ public class VehicleController {
                 .build(), HttpStatus.OK);
     }
 
-    @GetMapping("/by_id/{id}")
-    public ResponseEntity<DSResponse<VehicleResponse>> getVehicleById(@PathVariable(value = "id") String id){
+    @GetMapping("/by_id/{id}/details")
+    public ResponseEntity<DSResponse<VehicleResponse>> getVehicleById(
+            @PathVariable String id,
+            @RequestParam(required = false) List<String> info){
         VehicleResponse vehicleResponse = null;
         try {
-            vehicleResponse = vehicleService.getVehicleByID(id);
+            vehicleResponse = vehicleService.getVehicleByID(id, info);
         } catch (ServiceBusinessException serviceBusinessException) {
             return new ResponseEntity<>(DSResponse
                     .<VehicleResponse>builder()
                     .status(DSConstants.STATUS_FAILED)
-                    .build(), HttpStatus.INTERNAL_SERVER_ERROR
-            );
-        } catch (VehicleNotFoundException vehicleNotFoundException){
+                    .build(), HttpStatus.INTERNAL_SERVER_ERROR);
+            } catch (VehicleNotFoundException vehicleNotFoundException){
             return new ResponseEntity<>(DSResponse
                     .<VehicleResponse>builder()
                     .status(DSConstants.STATUS_FAILED)
