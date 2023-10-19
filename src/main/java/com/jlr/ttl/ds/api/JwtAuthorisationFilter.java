@@ -23,9 +23,11 @@ import java.util.LinkedHashMap;
 import java.util.List;
 
 /**
- * @author PCORREI1
- *<p>
- * Configuration class that runs whenever there is an API HTTP request. This runs for every GET/POST/PUT/DELETE request. The filter is applied to determine if the user has permission to access the request and the response is tailored to reflect RBAC.
+ *
+ * Configuration class that runs whenever there is an API HTTP request.
+ * This runs for every GET/POST/PUT/DELETE request.
+ * The filter is applied to determine if the user has permission to access the
+ * request and the response is tailored to reflect RBAC.
  */
 @Configuration
 public class JwtAuthorisationFilter extends OncePerRequestFilter {
@@ -33,11 +35,16 @@ public class JwtAuthorisationFilter extends OncePerRequestFilter {
     private final String defaultpath="/v1/vehicles/";
 
     /**
-     * This method is responsible for evaluating the JWT Token Authorities, examining the GET request path and controlling the issued response based on user permissions. It also evaluates the validity of the JWT Token.
+     * This method is responsible for evaluating the JWT Token Authorities,
+     * examining the GET request path and controlling the issued response based on user permissions.
+     * It also evaluates the validity of the JWT Token.
      *
-     * @param filterChain - FilterChain - Represents the filter the connection undergoes. Each time there is a new request the filter intercepts the request and may modify the response depending on user authorisation.
-     * @param request - HTTPServletRequest - Represents the HTTP request Call to the API. Includes the bearer Auth token the request must include
-     * @param response - HTTPServletResponse - Represents the response given back from the server to the client. This response can have several statuses (OK - JSON Response is returned, Unauthorised - User does not have Authority to view the response, or "I'm a Teapot" - No Auth Token Provided)
+     * @param filterChain - FilterChain - Represents the filter the connection undergoes.
+     * Each time there is a new request the filter intercepts the request and may
+     * modify the response depending on user authorisation.
+     * @param request - HTTPServletRequest - Represents the HTTP request Call to the API.
+     * Includes the bearer Auth token the request must include
+     * @param response - HTTPServletResponse - Represents the response given back from the server to the client.
      * **/
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {

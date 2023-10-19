@@ -9,9 +9,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author PCORREI1
- *<p>
- * This class allows generating JWT tokens with a specific secret. The tokens are encrypted with a specific SignatureAlgorithm to avoid manual tempering of the token by the user.
+ *
+ * This class allows generating JWT tokens with a specific secret.
+ * The tokens are encrypted with a specific SignatureAlgorithm to avoid manual tempering of the token by the user.
  */
 public class JwtUtils {
     private final String secret = "secret";

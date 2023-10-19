@@ -7,17 +7,19 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.web.SecurityFilterChain;
 
 /**
- * @author PCORREI1
- *<p>
- * Class responsible for configuring which paths are redirected to go through the filter for access control - Security Configuration for Spring Security
+ *
+ * Class responsible for configuring which paths are redirected
+ * to go through the filter for access control - Security Configuration for Spring Security
  */
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 
     /**
-     * This method specifies which endpoints are subject to go through the filter. This is set by default for all paths.
-     * The application context path is /ds this method requires that all /ds/v1 calls should be subject to the security filter. This can be adjusted to support further reseases
+     * This method specifies which endpoints are subject to go through the filter.
+     * This is set by default for all paths.
+     * The application context path is /ds this method requires that all /ds/v1 calls should be subject to the security filter.
+     * This can be adjusted to support further releases
      * @return Returns a modification for the configuration of the application HTTP calls, where a filter will now be applied.
      */
     @Bean
