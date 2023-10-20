@@ -41,10 +41,10 @@ public class VehicleController {
                 .build(), HttpStatus.OK);
     }
 
-    @GetMapping("/by_id/{id}/details")
+    @GetMapping("/by_id/{id}/")
     public ResponseEntity<DSResponse<VehicleResponse>> getVehicleById(
             @PathVariable String id,
-            @RequestParam(required = false) List<String> info){
+            @RequestParam(required = false) String info){
         VehicleResponse vehicleResponse = null;
         try {
             vehicleResponse = vehicleService.getVehicleByID(id, info);

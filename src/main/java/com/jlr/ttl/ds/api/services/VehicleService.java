@@ -36,7 +36,7 @@ public class VehicleService {
      * @since v1
      */
     @TrackExecutionTime
-    public VehicleResponse getVehicleByID(String id, List<String> info) throws ServiceBusinessException {
+    public VehicleResponse getVehicleByID(String id, String info) throws ServiceBusinessException {
         if(id==null || id.length()==0){
             String errorMessage = "No vehicle id was provided";
             log.warn(errorMessage);
@@ -47,7 +47,7 @@ public class VehicleService {
                     .orElseThrow(() -> new VehicleNotFoundException("No vehicle with ID : " + id + " was found"));
             VehicleResponse vehicleResponse = VehicleValueMapper.entityToResponse(dbResponse.createEntity());
             // Check request parameters
-            if (info.contains("location")) {
+            if (info.equals("location")) {
                 // Find location of the vehicle
                 String locCode = vehicleResponse.getLocCode();
                 DSTableInterface<Location> lcResponse = locationRepository.findById(locCode).orElseThrow(
