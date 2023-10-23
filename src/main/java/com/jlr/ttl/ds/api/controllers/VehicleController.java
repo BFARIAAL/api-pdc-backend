@@ -41,6 +41,22 @@ public class VehicleController {
                 .build(), HttpStatus.OK);
     }
 
+    /**
+     * Fetches the details of a vehicle using the provided vehicle ID.
+     *
+     * This endpoint allows users to retrieve details of a specified vehicle
+     * by its ID. Additionally, users can request specific details about
+     * the vehicle by providing an optional 'info' parameter.
+     *
+     * @param id    The unique identifier of the vehicle, not null.
+     * @param info  An optional parameter specifying which additional
+     *              details about the vehicle to retrieve (e.g., location).
+     * @return      A wrapped response containing the vehicle details or
+     *              an error status.
+     *
+     * @throws ServiceBusinessException  If there's an internal error during the retrieval process.
+     * @throws VehicleNotFoundException  If no vehicle is found for the provided ID.
+     */
     @GetMapping("/by_id/{id}/")
     public ResponseEntity<DSResponse<VehicleResponse>> getVehicleById(
             @PathVariable String id,
