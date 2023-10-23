@@ -41,13 +41,26 @@ public class VehicleController {
                 .build(), HttpStatus.OK);
     }
 
-    @GetMapping("/by_id/{id}/")
+    /**
+     * Retrieves information for a vehicle based on the provided ID and parameters.
+     *
+     * This method accepts a list of request parameters that must start with a valid
+     * vehicle ID, and can optionally include additional fields to return information
+     * for, such as location or vehicle attributes. The corresponding VehicleResponse
+     * object containing the requested details is returned.
+     *
+     * @param info info List of request parameters starting with vehicle ID
+     * @return VehicleResponse object with requested details
+     * @throws ServiceBusinessException On error retrieving vehicle
+     * @throws VehicleNotFoundException If vehicle ID not found
+     * @since v2
+     */
+    @GetMapping("/by_id/")
     public ResponseEntity<DSResponse<VehicleResponse>> getVehicleById(
-            @PathVariable String id,
-            @RequestParam(required = false) String info){
+            @RequestParam List<String> info){
         VehicleResponse vehicleResponse = null;
         try {
-            vehicleResponse = vehicleService.getVehicleByID(id, info);
+            vehicleResponse = vehicleService.getVehicleByID(info);
         } catch (ServiceBusinessException serviceBusinessException) {
             return new ResponseEntity<>(DSResponse
                     .<VehicleResponse>builder()

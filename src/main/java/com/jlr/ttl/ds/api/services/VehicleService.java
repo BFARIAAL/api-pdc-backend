@@ -3,7 +3,6 @@ package com.jlr.ttl.ds.api.services;
 import com.jlr.ttl.ds.api.annotation.TrackExecutionTime;
 import com.jlr.ttl.ds.api.dto.entity.Location;
 import com.jlr.ttl.ds.api.dto.entity.Vehicle;
-import com.jlr.ttl.ds.api.dto.response.LocationResponse;
 import com.jlr.ttl.ds.api.dto.response.VehicleResponse;
 import com.jlr.ttl.ds.api.dto.table.DSTableInterface;
 import com.jlr.ttl.ds.api.dto.table.VehiclesTable;
@@ -30,24 +29,31 @@ public class VehicleService {
     private LocationRepository locationRepository;
 
     /**
-     * Fetch the vehicle by the id passed
+     * Retrieves the vehicle details for the provided vehicle ID.
+     * Additional vehicle information can be included based on the request parameters.
      *
-     * @return Vehicle
-     * @since v1
+     * @param info Request parameters list, starting with vehicle ID
+     * @return VehicleResponse containing requested vehicle details
+     * @throws VehicleNotFoundException If no vehicle found for given ID
+     * @throws ServiceBusinessException For any other errors retrieving data
+     * @since v2
      */
     @TrackExecutionTime
-    public VehicleResponse getVehicleByID(String id, String info) throws ServiceBusinessException {
-        if(id==null || id.length()==0){
+    public VehicleResponse getVehicleByID(List<String> info) throws ServiceBusinessException {
+
+        // Case of empty list of String, or the first string is empty, or the first string is not id number
+        if(info.isEmpty() || info.get(0).isEmpty() || !isNumeric(info.get(0))){
             String errorMessage = "No vehicle id was provided";
-            log.warn(errorMessage);
             throw new IllegalArgumentException(errorMessage);
         }
+
+        String id = info.get(0);
         try {
             DSTableInterface<Vehicle> dbResponse = vehicleRepository.findById(id)
                     .orElseThrow(() -> new VehicleNotFoundException("No vehicle with ID : " + id + " was found"));
             VehicleResponse vehicleResponse = VehicleValueMapper.entityToResponse(dbResponse.createEntity());
             // Check request parameters
-            if (info.equals("location")) {
+            if (info.contains("location")) {
                 // Find location of the vehicle
                 String locCode = vehicleResponse.getLocCode();
                 DSTableInterface<Location> lcResponse = locationRepository.findById(locCode).orElseThrow(
@@ -81,6 +87,16 @@ public class VehicleService {
             return listOfVehicleResponse;
         }catch (Exception ex) {
             throw new ServiceBusinessException("Exception occurred while fetching vehicles");
+        }
+    }
+
+    // Helper method
+    public boolean isNumeric(String str) {
+        try {
+            Integer.parseInt(str);
+            return true;
+        } catch(NumberFormatException e){
+            return false;
         }
     }
 }
