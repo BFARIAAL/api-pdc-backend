@@ -42,25 +42,28 @@ public class VehicleController {
     }
 
     /**
-     * Retrieves information for a vehicle based on the provided ID and parameters.
+     * Fetches the details of a vehicle using the provided vehicle ID.
      *
-     * This method accepts a list of request parameters that must start with a valid
-     * vehicle ID, and can optionally include additional fields to return information
-     * for, such as location or vehicle attributes. The corresponding VehicleResponse
-     * object containing the requested details is returned.
+     * This endpoint allows users to retrieve details of a specified vehicle
+     * by its ID. Additionally, users can request specific details about
+     * the vehicle by providing an optional 'info' parameter.
      *
-     * @param info info List of request parameters starting with vehicle ID
-     * @return VehicleResponse object with requested details
-     * @throws ServiceBusinessException On error retrieving vehicle
-     * @throws VehicleNotFoundException If vehicle ID not found
-     * @since v2
+     * @param id    The unique identifier of the vehicle, not null.
+     * @param info  An optional parameter specifying which additional
+     *              details about the vehicle to retrieve (e.g., location).
+     * @return      A wrapped response containing the vehicle details or
+     *              an error status.
+     *
+     * @throws ServiceBusinessException  If there's an internal error during the retrieval process.
+     * @throws VehicleNotFoundException  If no vehicle is found for the provided ID.
      */
-    @GetMapping("/by_id/")
+    @GetMapping("/by_id/{id}/")
     public ResponseEntity<DSResponse<VehicleResponse>> getVehicleById(
-            @RequestParam List<String> info){
+            @PathVariable String id,
+            @RequestParam(required = false) String info){
         VehicleResponse vehicleResponse = null;
         try {
-            vehicleResponse = vehicleService.getVehicleByID(info);
+            vehicleResponse = vehicleService.getVehicleByID(id, info);
         } catch (ServiceBusinessException serviceBusinessException) {
             return new ResponseEntity<>(DSResponse
                     .<VehicleResponse>builder()
