@@ -2600,3 +2600,46 @@ java.lang.IllegalArgumentException: No vehicle id was provided
 2023-10-23T14:38:29.787+01:00  INFO 20400 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
 2023-10-23T14:38:29.789+01:00  INFO 20400 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
 2023-10-23T14:38:29.798+01:00  INFO 20400 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2023-10-24T10:17:51.998+01:00  INFO 4328 --- [main] com.jlr.ttl.ds.api.DSApiApplication      : Starting DSApiApplication using Java 20.0.2 with PID 4328 (C:\Users\hwang36\Documents\D42\api-pdc-backend\target\classes started by HWANG36 in C:\Users\hwang36\Documents\D42\api-pdc-backend)
+2023-10-24T10:17:52.001+01:00  INFO 4328 --- [main] com.jlr.ttl.ds.api.DSApiApplication      : No active profile set, falling back to 1 default profile: "default"
+2023-10-24T10:17:52.686+01:00  INFO 4328 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-10-24T10:17:52.765+01:00  INFO 4328 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 68 ms. Found 3 JPA repository interfaces.
+2023-10-24T10:17:53.559+01:00  INFO 4328 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2023-10-24T10:17:53.568+01:00  INFO 4328 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-10-24T10:17:53.568+01:00  INFO 4328 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.12]
+2023-10-24T10:17:53.630+01:00  INFO 4328 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/ds]     : Initializing Spring embedded WebApplicationContext
+2023-10-24T10:17:53.630+01:00  INFO 4328 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1568 ms
+2023-10-24T10:17:53.805+01:00  INFO 4328 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-10-24T10:17:54.180+01:00  INFO 4328 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@448462f0
+2023-10-24T10:17:54.182+01:00  INFO 4328 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-10-24T10:17:54.219+01:00  INFO 4328 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-10-24T10:17:54.270+01:00  INFO 4328 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.2.7.Final
+2023-10-24T10:17:54.273+01:00  INFO 4328 --- [main] org.hibernate.cfg.Environment            : HHH000406: Using bytecode reflection optimizer
+2023-10-24T10:17:54.426+01:00  INFO 4328 --- [main] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2023-10-24T10:17:54.601+01:00  INFO 4328 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-10-24T10:17:54.857+01:00  INFO 4328 --- [main] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2023-10-24T10:17:55.297+01:00  INFO 4328 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-10-24T10:17:55.299+01:00  INFO 4328 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-10-24T10:17:55.809+01:00  WARN 4328 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-10-24T10:17:56.342+01:00  INFO 4328 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path '/ds'
+2023-10-24T10:17:56.351+01:00  INFO 4328 --- [main] com.jlr.ttl.ds.api.DSApiApplication      : Started DSApiApplication in 4.781 seconds (process running for 5.09)
+2023-10-24T10:18:03.838+01:00  INFO 4328 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/ds]     : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-10-24T10:18:03.838+01:00  INFO 4328 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-10-24T10:18:03.841+01:00  INFO 4328 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2023-10-24T10:18:03.889+01:00  INFO 4328 --- [http-nio-8080-exec-1] c.jlr.ttl.ds.api.advice.DSLoggingAdvice  : com.jlr.ttl.ds.api.controllers.VehicleController::getAllVehicles():: Entering method
+2023-10-24T10:18:03.889+01:00  INFO 4328 --- [http-nio-8080-exec-1] c.jlr.ttl.ds.api.advice.DSLoggingAdvice  : com.jlr.ttl.ds.api.services.VehicleService::getAllVehicles():: Entering method
+2023-10-24T10:18:04.116+01:00  INFO 4328 --- [http-nio-8080-exec-1] c.j.ttl.ds.api.services.VehicleService   : Retrieved data from database, transforming to response
+2023-10-24T10:18:04.119+01:00  INFO 4328 --- [http-nio-8080-exec-1] c.jlr.ttl.ds.api.advice.DSLoggingAdvice  : com.jlr.ttl.ds.api.services.VehicleService::getAllVehicles():: Exiting method
+2023-10-24T10:18:04.124+01:00  INFO 4328 --- [http-nio-8080-exec-1] c.jlr.ttl.ds.api.advice.DSLoggingAdvice  : com.jlr.ttl.ds.api.controllers.VehicleController::getAllVehicles():: Exiting method
+2023-10-24T10:18:23.714+01:00  INFO 4328 --- [http-nio-8080-exec-3] c.jlr.ttl.ds.api.advice.DSLoggingAdvice  : com.jlr.ttl.ds.api.controllers.VehicleController::getVehicleById():: Entering method
+2023-10-24T10:18:23.715+01:00  INFO 4328 --- [http-nio-8080-exec-3] c.jlr.ttl.ds.api.advice.DSLoggingAdvice  : com.jlr.ttl.ds.api.services.VehicleService::getVehicleByID():: Entering method
+2023-10-24T10:18:23.728+01:00  INFO 4328 --- [http-nio-8080-exec-3] c.jlr.ttl.ds.api.advice.DSLoggingAdvice  : jdk.proxy2.$Proxy118::findById():: Entering method
+2023-10-24T10:18:23.767+01:00  INFO 4328 --- [http-nio-8080-exec-3] c.jlr.ttl.ds.api.advice.DSLoggingAdvice  : jdk.proxy2.$Proxy118::findById():: Exiting method
+2023-10-24T10:18:23.774+01:00  INFO 4328 --- [http-nio-8080-exec-3] c.j.t.ds.api.advice.ExecutionTimeAdvice  : com.jlr.ttl.ds.api.services.VehicleService::getVehicleByID()::Execution time = 46 ms
+2023-10-24T10:18:23.774+01:00  INFO 4328 --- [http-nio-8080-exec-3] c.jlr.ttl.ds.api.advice.DSLoggingAdvice  : com.jlr.ttl.ds.api.services.VehicleService::getVehicleByID():: Exiting method
+2023-10-24T10:18:23.774+01:00  INFO 4328 --- [http-nio-8080-exec-3] c.jlr.ttl.ds.api.advice.DSLoggingAdvice  : com.jlr.ttl.ds.api.controllers.VehicleController::getVehicleById():: Exiting method
+2023-10-24T10:18:35.587+01:00  INFO 4328 --- [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2023-10-24T10:18:35.593+01:00  INFO 4328 --- [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2023-10-24T10:18:35.599+01:00  INFO 4328 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-10-24T10:18:35.601+01:00  INFO 4328 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-10-24T10:18:35.604+01:00  INFO 4328 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.

@@ -2,7 +2,6 @@ package com.jlr.ttl.ds.api.controllers;
 
 import com.jlr.ttl.ds.api.constants.DSConstants;
 import com.jlr.ttl.ds.api.dto.DSResponse;
-import com.jlr.ttl.ds.api.dto.response.DSResponseInterface;
 import com.jlr.ttl.ds.api.dto.response.VehicleResponse;
 import com.jlr.ttl.ds.api.exception.ServiceBusinessException;
 import com.jlr.ttl.ds.api.exception.data.VehicleNotFoundException;

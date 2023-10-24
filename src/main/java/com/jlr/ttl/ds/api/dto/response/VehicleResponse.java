@@ -20,4 +20,5 @@ public class VehicleResponse implements DSResponseInterface<Vehicle> {
     private Date endDate;
     private String status;
     private LocationResponse locationResponse;
+    private String orderNumber;
 }

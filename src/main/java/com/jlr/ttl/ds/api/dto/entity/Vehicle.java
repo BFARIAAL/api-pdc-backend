@@ -18,4 +18,5 @@ public class Vehicle implements Entity<Vehicle> {
     private String locCode;
     private Date endDate;
     private String status;
+    private String orderNumber;
 }
