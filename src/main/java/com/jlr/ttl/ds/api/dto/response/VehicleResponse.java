@@ -19,4 +19,5 @@ public class VehicleResponse implements DSResponseInterface<Vehicle> {
     private String locCode;
     private Date endDate;
     private String status;
+    private String assemblyPlant;
 }
