@@ -2,6 +2,7 @@ package com.jlr.ttl.ds.api.controllers;
 
 import com.jlr.ttl.ds.api.constants.DSConstants;
 import com.jlr.ttl.ds.api.dto.DSResponse;
+import com.jlr.ttl.ds.api.dto.response.DSResponseInterface;
 import com.jlr.ttl.ds.api.dto.response.VehicleResponse;
 import com.jlr.ttl.ds.api.exception.ServiceBusinessException;
 import com.jlr.ttl.ds.api.exception.data.VehicleNotFoundException;
@@ -40,18 +41,35 @@ public class VehicleController {
                 .build(), HttpStatus.OK);
     }
 
-    @GetMapping("/by_id/{id}")
-    public ResponseEntity<DSResponse<VehicleResponse>> getVehicleById(@PathVariable(value = "id") String id){
+    /**
+     * Fetches the details of a vehicle using the provided vehicle ID.
+     *
+     * This endpoint allows users to retrieve details of a specified vehicle
+     * by its ID. Additionally, users can request specific details about
+     * the vehicle by providing an optional 'requiredInfo' parameter.
+     *
+     * @param id    The unique identifier of the vehicle, not null.
+     * @param requiredInfo  An optional parameter specifying which additional
+     *              details about the vehicle to retrieve (e.g., location).
+     * @return      A wrapped response containing the vehicle details or
+     *              an error status.
+     *
+     * @throws ServiceBusinessException  If there's an internal error during the retrieval process.
+     * @throws VehicleNotFoundException  If no vehicle is found for the provided ID.
+     */
+    @GetMapping("/by_id/{id}/")
+    public ResponseEntity<DSResponse<VehicleResponse>> getVehicleById(
+            @PathVariable String id,
+            @RequestParam(required = false) String requiredInfo){
         VehicleResponse vehicleResponse = null;
         try {
-            vehicleResponse = vehicleService.getVehicleByID(id);
+            vehicleResponse = vehicleService.getVehicleByID(id, requiredInfo);
         } catch (ServiceBusinessException serviceBusinessException) {
             return new ResponseEntity<>(DSResponse
                     .<VehicleResponse>builder()
                     .status(DSConstants.STATUS_FAILED)
-                    .build(), HttpStatus.INTERNAL_SERVER_ERROR
-            );
-        } catch (VehicleNotFoundException vehicleNotFoundException){
+                    .build(), HttpStatus.INTERNAL_SERVER_ERROR);
+            } catch (VehicleNotFoundException vehicleNotFoundException){
             return new ResponseEntity<>(DSResponse
                     .<VehicleResponse>builder()
                     .status(DSConstants.STATUS_FAILED)
