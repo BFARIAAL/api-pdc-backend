@@ -46,10 +46,10 @@ public class VehicleController {
      *
      * This endpoint allows users to retrieve details of a specified vehicle
      * by its ID. Additionally, users can request specific details about
-     * the vehicle by providing an optional 'info' parameter.
+     * the vehicle by providing an optional 'requiredInfo' parameter.
      *
      * @param id    The unique identifier of the vehicle, not null.
-     * @param info  An optional parameter specifying which additional
+     * @param requiredInfo  An optional parameter specifying which additional
      *              details about the vehicle to retrieve (e.g., location).
      * @return      A wrapped response containing the vehicle details or
      *              an error status.
@@ -60,10 +60,10 @@ public class VehicleController {
     @GetMapping("/by_id/{id}/")
     public ResponseEntity<DSResponse<VehicleResponse>> getVehicleById(
             @PathVariable String id,
-            @RequestParam(required = false) String info){
+            @RequestParam(required = false) String requiredInfo){
         VehicleResponse vehicleResponse = null;
         try {
-            vehicleResponse = vehicleService.getVehicleByID(id, info);
+            vehicleResponse = vehicleService.getVehicleByID(id, requiredInfo);
         } catch (ServiceBusinessException serviceBusinessException) {
             return new ResponseEntity<>(DSResponse
                     .<VehicleResponse>builder()

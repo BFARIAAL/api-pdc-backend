@@ -17,5 +17,4 @@ public class Vehicle implements Entity<Vehicle> {
     private String vin;
     private String locCode;
     private Date endDate;
-    private String status;
 }

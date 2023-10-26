@@ -18,5 +18,4 @@ public class VehicleRequest implements DSRequestInterface<Vehicle> {
     private String vin;
     private String locCode;
     private Date endDate;
-    private String status;
 }
