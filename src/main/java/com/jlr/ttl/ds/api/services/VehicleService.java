@@ -20,8 +20,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.jlr.ttl.ds.api.constants.DSConstants.LOCATION;
-import static org.apache.logging.log4j.util.Strings.EMPTY;
+import static com.jlr.ttl.ds.api.constants.DSConstants.*;
 
 @Service
 @AllArgsConstructor
